@@ -1,0 +1,44 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+# image will be published to ghcr.io/<user>/<name>
+name: aura360-os
+# description will be included in the image's metadata
+description: Aura 360 OS â€” immutable creator workstation (design, video, audio, code) built on Bazzite DX.
+
+# the base image to build on top of (FROM) and the version tag to use
+base-image: ghcr.io/ublue-os/bazzite-dx-nvidia
+image-version: stable
+
+# module configuration, executed in order
+modules:
+  - type: files
+    files:
+      - source: system
+        destination: / # copies files/system/* into the image root (/)
+
+  - type: systemd
+    system:
+      enabled:
+        - aura-performance.service
+
+  - type: dnf
+    install:
+      packages:
+        - kernel-tools # provides cpupower (CPU governor for low-latency audio)
+
+  - type: default-flatpaks
+    configurations:
+      - notify: true
+        scope: system
+        install:
+          - org.kde.krita
+          - org.gimp.GIMP
+          - org.inkscape.Inkscape
+          - org.blender.Blender
+          - org.kde.kdenlive
+          - org.ardour.Ardour
+          - org.audacityteam.Audacity
+          - org.darktable.Darktable
+          - com.rawtherapee.RawTherapee
+          - net.scribus.Scribus
+      - scope: user
