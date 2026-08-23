@@ -1,0 +1,41 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+# AMD/Intel variant (no NVIDIA drivers; uses Mesa/open drivers)
+name: aura360-os-open
+description: Aura 360 OS â€” immutable creator workstation (AMD/Intel GPU variant) built on Bazzite DX.
+
+base-image: ghcr.io/ublue-os/bazzite-dx
+image-version: stable
+
+modules:
+  - type: files
+    files:
+      - source: system
+        destination: /
+
+  - type: systemd
+    system:
+      enabled:
+        - aura-performance.service
+
+  - type: dnf
+    install:
+      packages:
+        - kernel-tools
+
+  - type: default-flatpaks
+    configurations:
+      - notify: true
+        scope: system
+        install:
+          - org.kde.krita
+          - org.gimp.GIMP
+          - org.inkscape.Inkscape
+          - org.blender.Blender
+          - org.kde.kdenlive
+          - org.ardour.Ardour
+          - org.audacityteam.Audacity
+          - org.darktable.Darktable
+          - com.rawtherapee.RawTherapee
+          - net.scribus.Scribus
+      - scope: user
