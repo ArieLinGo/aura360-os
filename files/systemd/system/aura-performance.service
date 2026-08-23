@@ -1,0 +1,11 @@
+[Unit]
+Description=Set CPU governor to performance (Aura 360 OS)
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cpupower frequency-set -g performance
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
