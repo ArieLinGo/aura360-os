@@ -3,7 +3,7 @@
 # image will be published to ghcr.io/<user>/<name>
 name: aura360-os
 # description will be included in the image's metadata
-description: Aura 360 OS â€” immutable creator workstation (design, video, audio, code) built on Bazzite DX.
+description: Aura 360 OS — immutable creator workstation (design, video, audio, code) built on Bazzite DX.
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bazzite-dx-nvidia
