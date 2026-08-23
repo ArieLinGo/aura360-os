@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Aura 360 OS
+Description=Aura 360 OS boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/aura360
+ScriptFile=/usr/share/plymouth/themes/aura360/aura360.script
