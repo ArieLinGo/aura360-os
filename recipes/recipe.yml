@@ -25,6 +25,7 @@ modules:
     install:
       packages:
         - kernel-tools # provides cpupower (CPU governor for low-latency audio)
+        - plymouth-plugin-script # provides /usr/lib64/plymouth/script.so (needed by our boot theme)
 
   - type: default-flatpaks
     configurations:
