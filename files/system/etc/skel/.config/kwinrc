@@ -1,0 +1,4 @@
+[org.kde.kdecoration2]
+ButtonsOnLeft=XAI
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__WhiteSur-dark
