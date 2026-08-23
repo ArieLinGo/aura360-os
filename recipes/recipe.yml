@@ -41,4 +41,14 @@ modules:
           - org.darktable.Darktable
           - com.rawtherapee.RawTherapee
           - net.scribus.Scribus
+          - com.usebottles.bottles
       - scope: user
+
+  - type: script
+    snippets:
+      - plymouth-set-default-theme -R aura360
+      - sed -i 's/^NAME=.*/NAME="Aura 360 OS"/' /usr/lib/os-release
+      - sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="Aura 360 OS"/' /usr/lib/os-release
+      - sed -i 's/^LOGO=.*/LOGO=aura360-logo/' /usr/lib/os-release
+      - grep -q '^LOGO=' /usr/lib/os-release || echo 'LOGO=aura360-logo' >> /usr/lib/os-release
+      - sed -i 's/^DEFAULT_HOSTNAME=.*/DEFAULT_HOSTNAME="aura360"/' /usr/lib/os-release
