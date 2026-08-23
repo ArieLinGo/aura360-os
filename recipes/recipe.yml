@@ -47,6 +47,8 @@ modules:
 
   - type: script
     snippets:
+      - python3 -m zipfile -e /usr/share/aura360/aura360-theme.zip /
+      - rm -f /usr/share/aura360/aura360-theme.zip
       - plymouth-set-default-theme -R aura360
       - sed -i 's/^NAME=.*/NAME="Aura 360 OS"/' /usr/lib/os-release
       - sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="Aura 360 OS"/' /usr/lib/os-release
