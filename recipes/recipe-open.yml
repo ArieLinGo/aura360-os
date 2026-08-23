@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # AMD/Intel variant (no NVIDIA drivers; uses Mesa/open drivers)
 name: aura360-os-open
-description: Aura 360 OS â€” immutable creator workstation (AMD/Intel GPU variant) built on Bazzite DX.
+description: Aura 360 OS — immutable creator workstation (AMD/Intel GPU variant) built on Bazzite DX.
 
 base-image: ghcr.io/ublue-os/bazzite-dx
 image-version: stable
