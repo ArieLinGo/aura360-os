@@ -65,6 +65,16 @@ Podman, bpftrace, sysprof y ROCm**.
 | Suite creativa | Krita, GIMP, Inkscape, Blender, Kdenlive, Ardour, Audacity, Darktable, RawTherapee, Scribus (Flatpak automático) |
 | Heredado de Bazzite | DaVinci Resolve y Affinity vía helpers `ujust`, OBS VkCapture, códecs, NVIDIA |
 
+## Compatibilidad con programas de Windows y Adobe
+- **Bottles** (preinstalado): aplicaciones de Windows con Wine aislado por contenedor — Photoshop y utilidades sin riesgo para el sistema.
+- **Affinity** vía `ujust setup-affinity` (Wine preconfigurado, heredado de Bazzite).
+- **VM con GPU passthrough** (QEMU/KVM ya incluidos): el Adobe completo (Premiere, After Effects, Illustrator) en Windows virtualizado, 100% aislado.
+- **Proton** heredado de Bazzite para juegos de Windows.
+- Guía completa: [Compatibilidad Windows y Adobe](docs/WINDOWS.md)
+
+## Identidad integrada
+- Logo de Aura 360 OS en la **pantalla de arranque** (Plymouth) y en el sistema (**Acerca de** e iconos), con versiones de fondo blanco y transparente.
+
 ## Cómo instalar
 
 ```bash
