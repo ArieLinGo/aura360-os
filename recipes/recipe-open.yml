@@ -22,6 +22,7 @@ modules:
     install:
       packages:
         - kernel-tools
+        - plymouth-plugin-script
 
   - type: default-flatpaks
     configurations:
