@@ -73,7 +73,16 @@ Podman, bpftrace, sysprof y ROCm**.
 - Guía completa: [Compatibilidad Windows y Adobe](docs/WINDOWS.md)
 
 ## Identidad integrada
-- Logo de Aura 360 OS en la **pantalla de arranque** (Plymouth) y en el sistema (**Acerca de** e iconos), con versiones de fondo blanco y transparente.
+- Logo de Aura 360 OS en la **pantalla de arranque** (Plymouth, texto blanco sobre fondo negro estilo Apple) y en el sistema (**Acerca de** e iconos), con versiones para temas claros y oscuros.
+
+## Estética macOS/iOS — limpia, minimalista y moderna
+- Tema global **WhiteSur** incluido: variante **light** y **dark** (por defecto).
+- Decoraciones de ventana estilo macOS (aurorae), esquemas de color y temas de Plasma.
+- Para aplicarlo tras el primer arranque:
+  ```bash
+  ujust aura360-theme-dark     # tema oscuro (recomendado)
+  ujust aura360-theme-light    # tema claro
+  ```
 
 ## Cómo instalar
 
