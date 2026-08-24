@@ -6,11 +6,19 @@ name: aura360-os
 description: Aura 360 OS — immutable creator workstation (design, video, audio, code) built on Bazzite DX.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/bazzite-dx-nvidia
+# NOTA: se usa bazzite-dx (sin NVIDIA) + modulo akmods con nvidia-driver: nvidia
+# (driver 580 LTS desde negativo17) porque el driver 610+ ya NO soporta GPUs
+# Pascal (GTX 10xx). La base bazzite-dx-nvidia trae 610, incompatible con
+# GTX 1080/1070/1060 etc.
+base-image: ghcr.io/ublue-os/bazzite-dx
 image-version: stable
 
 # module configuration, executed in order
 modules:
+  # Driver NVIDIA 580 LTS (soporta Maxwell/Pascal) + kmod compilado en el build
+  - type: akmods
+    nvidia-driver: nvidia
+
   - type: files
     files:
       - source: system
