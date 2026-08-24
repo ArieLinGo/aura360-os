@@ -39,6 +39,17 @@ construida con **BlueBuild** sobre **Bazzite DX (NVIDIA)**.
 - `aura360-os-open` (AMD/Intel): base `ghcr.io/ublue-os/bazzite-dx:stable`
 
 ## Pendiente (próximas iteraciones)
-- Firma cosign (`signing` module + `SIGNING_SECRET`)
 - Variante GNOME
-- `ujust` propio (helper de setup) y validación de Flatpak IDs en el primer build real
+- Validación de Flatpak IDs en el primer build real
+
+## Correcciones aplicadas (revisión 2026-08-24)
+- **Plymouth activo**: se fija `Theme=aura360` en `plymouthd.defaults` (el
+  `plymouth-set-default-theme -R` no funciona dentro del build en contenedor).
+- **Grupos realtime aplicados al usuario**: nuevo servicio de primer arranque
+  `aura360-audio-setup.service` que agrega el primer usuario normal a
+  `@audio`/`@realtime` (patrón caracal completo).
+- **Firma cosign**: imagen firmada con `SIGNING_SECRET` (clave privada cosign);
+  rebase con `ostree-image-signed:` + clave pública en `/etc/pki/containers/`.
+- **Helper Affinity real**: `ujust aura360-setup-affinity` (Wine Soda + Wine
+  Mono + DXVK/VKD3D + extracción del MSIX) — reemplaza la referencia inexistente
+  a un "setup-affinity heredado de Bazzite".

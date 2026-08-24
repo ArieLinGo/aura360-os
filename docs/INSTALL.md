@@ -8,22 +8,30 @@ imagen inmutable que se aplica por *rebase* encima de esa base.
 
 ```bash
 # Variante NVIDIA (recomendada para DaVinci Resolve)
-rpm-ostree rebase ostree-unverified-registry:ghcr.io/arielingo/aura360-os:latest
+rpm-ostree rebase ostree-image-signed:docker://ghcr.io/arielingo/aura360-os:latest
 
 # Variante AMD/Intel (sin drivers NVIDIA)
-rpm-ostree rebase ostree-unverified-registry:ghcr.io/arielingo/aura360-os-open:latest
+rpm-ostree rebase ostree-image-signed:docker://ghcr.io/arielingo/aura360-os-open:latest
 
 systemctl reboot
 ```
 
-> La imagen va **sin firmar** en v0.2, por eso se usa `ostree-unverified-registry:`.
+> La imagen está **firmada con cosign**. Después del primer rebase, instala la
+> clave pública para verificar las actualizaciones:
+> ```bash
+> sudo mkdir -p /etc/pki/containers
+> sudo cp cosign.pub /etc/pki/containers/ghcr.io.pub
+> ```
 
 ## 2. Qué pasa en el primer arranque (automático)
 - Los **Flatpaks creativos** se instalan solos (módulo `default-flatpaks`):
   Krita, GIMP, Inkscape, Blender, Kdenlive, Ardour, Audacity, Darktable,
   RawTherapee, Scribus.
-- La capa de **audio pro** ya está activa: grupos `@audio`/`@realtime`
-  (rtprio 95), governor CPU `performance`, y el servicio `aura-performance.service`.
+- La capa de **audio pro** ya está activa: el usuario se agrega solo a los
+  grupos `@audio`/`@realtime` (rtprio 95 + memlock ilimitado), governor CPU
+  `performance`, y el servicio `aura-performance.service`.
+- **Importante**: cierra y abre la sesión una vez después del primer arranque
+  para que los grupos de audio se apliquen a tu sesión.
 
 ## 3. Verificaciones post-instalación
 
@@ -38,17 +46,19 @@ ulimit -r -l
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 ```
 
-## 4. DaVinci Resolve y Affinity (helpers de Bazzite)
+## 4. DaVinci Resolve y Affinity
 
 ```bash
 # DaVinci Resolve (binario oficial en contenedor davincibox)
 ujust install-resolve        # o: ujust install-davinci
 
-# Affinity vía Wine
-ujust setup-affinity
+# Affinity vía Wine (helper propio de Aura 360; usa el MSIX de ~/Descargas)
+ujust aura360-setup-affinity
 ```
 
-> Si el nombre exacto de un helper cambia, `ujust --list` te lo muestra.
+> El helper de Affinity descarga Wine Soda + Wine Mono (runtime .NET) +
+> DXVK/VKD3D, extrae el MSIX y crea el lanzador. Verificación opcional:
+> `ujust aura360-check-audio`.
 > Referencia del contenedor: https://github.com/zelikos/davincibox
 
 ## 5. Actualizaciones

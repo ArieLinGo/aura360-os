@@ -1,0 +1,11 @@
+[Unit]
+Description=Aura 360 OS - add user to audio/realtime groups (first boot)
+ConditionPathExists=!/var/lib/aura360-audio-setup.done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/aura360/aura360-audio-setup.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

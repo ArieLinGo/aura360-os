@@ -67,7 +67,7 @@ Podman, bpftrace, sysprof y ROCm**.
 
 ## Compatibilidad con programas de Windows y Adobe
 - **Bottles** (preinstalado): aplicaciones de Windows con Wine aislado por contenedor — Photoshop y utilidades sin riesgo para el sistema.
-- **Affinity** vía `ujust setup-affinity` (Wine preconfigurado, heredado de Bazzite).
+- **Affinity** vía `ujust aura360-setup-affinity` (helper propio: Wine Soda + .NET + DXVK/VKD3D, usa el instalador `Affinity x64.msix` de ~/Descargas).
 - **VM con GPU passthrough** (QEMU/KVM ya incluidos): el Adobe completo (Premiere, After Effects, Illustrator) en Windows virtualizado, 100% aislado.
 - **Proton** heredado de Bazzite para juegos de Windows.
 - Guía completa: [Compatibilidad Windows y Adobe](docs/WINDOWS.md)
@@ -88,13 +88,24 @@ Podman, bpftrace, sysprof y ROCm**.
 
 ```bash
 # Variante NVIDIA (recomendada para DaVinci Resolve)
-rpm-ostree rebase ostree-unverified-registry:ghcr.io/arielingo/aura360-os:latest
+rpm-ostree rebase ostree-image-signed:docker://ghcr.io/arielingo/aura360-os:latest
 
 # Variante AMD/Intel
-rpm-ostree rebase ostree-unverified-registry:ghcr.io/arielingo/aura360-os-open:latest
+rpm-ostree rebase ostree-image-signed:docker://ghcr.io/arielingo/aura360-os-open:latest
 
 systemctl reboot
 ```
+
+> La imagen está firmada con cosign. Tras el primer rebase, instala la clave
+> pública para que las futuras actualizaciones se verifiquen automáticamente:
+> ```bash
+> sudo mkdir -p /etc/pki/containers
+> sudo cp cosign.pub /etc/pki/containers/ghcr.io.pub
+> ```
+
+> Tras el primer arranque, cierra y abre sesión una vez: el usuario se añade
+> automáticamente a los grupos `audio` y `realtime` (límites rtprio 95) en el
+> primer inicio (servicio `aura360-audio-setup`).
 
 Guías: [Instalación y primer arranque](docs/INSTALL.md) · [Dual boot con Windows](docs/DUALBOOT.md)
 
